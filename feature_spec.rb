@@ -12,4 +12,4 @@ user.withdraw(500)
 user.withdraw(5000)
 user.deposit(10)
 
-user.bank_account.get_statement.print_full
+user.print_statement

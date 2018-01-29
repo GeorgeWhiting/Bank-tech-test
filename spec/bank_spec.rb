@@ -4,7 +4,7 @@ describe Bank do
   let :statement_class {double(:statement_class, new: statement)}
   let :transaction {double(:transaction, date: "1/1/18", amount: 10, balance: 10)}
   let :statement {double(:statement, print_full: "hello")}
-  let :user {double(:user, name: "Geg", address: "123 Street Street")}
+  let :user {double(:user, name: "Geg")}
   subject {described_class.new(transaction_class, statement_class)}
 
   describe "#balance" do

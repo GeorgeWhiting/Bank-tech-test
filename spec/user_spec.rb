@@ -3,12 +3,11 @@ describe User do
   let :bank_class {double(:bank_class, new: bank)}
   let :bank {double(:bank, balance: 10, print_statement: statement)}
   let :statement {double(:statement, print_full: "hello")}
-  subject {described_class.new("Geg", "123 Street Street", bank_class)}
+  subject {described_class.new("Geg", bank_class)}
 
 
   it "can be initialised with name, address" do
     expect(subject.name).to eq "Geg"
-    expect(subject.address).to eq "123 Street Street"
   end
 
   it "should be able to open a bank account" do
