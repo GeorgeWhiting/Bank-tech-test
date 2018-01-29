@@ -9,15 +9,15 @@ class Statement
   end
 
   def print_header
-    puts 'date || credit || debit || balance'
+    puts "Date " + "|| Credit ".rjust(16) + "|| Debit ".rjust(14) + "|| Balance".rjust(16)
   end
 
   def print_transactions
     @transaction_history.reverse.each do |transaction|
       puts "#{transaction.date} ||" +
-            " #{credit_or_debit(transaction.amount)[0]} ||" +
-            " #{credit_or_debit(transaction.amount)[1]} ||" +
-            " #{transaction.balance}"
+            " £#{'%0.2f' % credit_or_debit(transaction.amount)[0]} ||".rjust(15) +
+            " £#{'%0.2f' % credit_or_debit(transaction.amount)[1]} ||".rjust(15) +
+            " £#{'%0.2f' % transaction.balance}".rjust(15)
     end
   end
 

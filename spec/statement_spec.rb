@@ -6,14 +6,14 @@ describe Statement do
 
   describe "#print_header" do
     it "should print the header out" do
-      expect {subject.print_header}.to output("date || credit || debit || balance\n").to_stdout
+      expect {subject.print_header}.to output("Date " + "|| Credit ".rjust(16) + "|| Debit ".rjust(14) + "|| Balance\n".rjust(17)).to_stdout
     end
   end
 
   describe "#print_transactions" do
     it "should print the transactions body out" do
       allow(transaction_history).to receive_message_chain(:reverse, :each).and_yield(transaction)
-      expect {subject.print_transactions}.to output("1/1/18 || 10 || 0 || 10\n").to_stdout
+      expect {subject.print_transactions}.to output("1/1/18 ||" + " £10.00 ||".rjust(15) + " £0.00 ||".rjust(15) + " £10.00\n".rjust(16)).to_stdout
     end
   end
 
@@ -21,8 +21,8 @@ describe Statement do
     it "should print the full transactions list out" do
       allow(transaction_history).to receive_message_chain(:reverse, :each).and_yield(transaction)
       expect {subject.print_full}.to output(<<~MESSAGE).to_stdout
-      date || credit || debit || balance
-      1/1/18 || 10 || 0 || 10
+      Date       || Credit      || Debit       || Balance
+      1/1/18 ||      £10.00 ||       £0.00 ||         £10.00
       MESSAGE
     end
   end
