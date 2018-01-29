@@ -13,5 +13,13 @@ class User
     @bank_account = bank_account
   end
 
+  def deposit(amount)
+    @bank_account.deposit(amount)
+  end
+
+  def withdraw(amount)
+    @bank_account.withdraw(amount)
+  end
+
 
 end
