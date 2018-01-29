@@ -1,5 +1,7 @@
 require 'User'
 require 'Bank'
+require 'Transaction'
+require 'Statement'
 
 
 require 'simplecov'
