@@ -1,3 +1,7 @@
+require 'User'
+require 'Bank'
+
+
 require 'simplecov'
 require 'simplecov-console'
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([

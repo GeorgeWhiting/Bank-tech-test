@@ -1,5 +1,3 @@
-require 'User'
-
 describe User do
 
   let :bank {double(:bank)}
