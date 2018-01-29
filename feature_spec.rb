@@ -3,7 +3,7 @@ require_relative './lib/bank'
 require_relative './lib/transaction'
 require_relative './lib/statement'
 
-user = User.new("Geg", "123 Street Street")
+user = User.new("Geg")
 
 user.create_bank_account
 
