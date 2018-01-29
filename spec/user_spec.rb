@@ -15,6 +15,11 @@ describe User do
     subject.create_bank_account
   end
 
+  it "shouldn't be able to have multiple accounts" do
+    subject.create_bank_account
+    expect(subject.create_bank_account).to eq "You already have an account"
+  end
+
   describe "#deposit" do
     it "should call the bank's deposit method" do
       subject.create_bank_account

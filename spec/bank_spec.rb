@@ -20,6 +20,12 @@ describe Bank do
       subject.deposit(10)
       expect {subject.withdraw(5)}.to change {subject.balance}.by -5
     end
+
+    it "should reject a withdrawal that would bring the balance below 0" do
+      subject.deposit(10)
+      expect {subject.withdraw(15)}.to change {subject.balance}.by 0
+      expect(subject.withdraw(15)).to eq "You don't have that much money"
+    end
   end
 
 end

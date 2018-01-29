@@ -11,7 +11,7 @@ class Bank
   end
 
   def withdraw(amount)
-    @balance -= amount
+    (@balance - amount < 0) ? "You don't have that much money" : @balance -= amount 
   end
 
 end

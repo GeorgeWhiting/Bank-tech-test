@@ -1,4 +1,4 @@
-require 'Bank'
+require_relative 'bank'
 class User
 
   attr_reader :name, :address
@@ -12,7 +12,7 @@ class User
   end
 
   def create_bank_account
-    @bank_account = @bank_class.new
+    @bank_account.nil? ? @bank_account = @bank_class.new : "You already have an account"
   end
 
   def deposit(amount)
