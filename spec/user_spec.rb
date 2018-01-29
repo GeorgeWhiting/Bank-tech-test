@@ -1,7 +1,7 @@
 describe User do
 
   let :bank_class {double(:bank_class, new: bank)}
-  let :bank {double(:bank, balance: 10)}
+  let :bank {double(:bank, balance: 10, transaction_history: "history")}
   subject {described_class.new("Geg", "123 Street Street", bank_class)}
 
 
@@ -18,6 +18,13 @@ describe User do
   it "shouldn't be able to have multiple accounts" do
     subject.create_bank_account
     expect(subject.create_bank_account).to eq "You already have an account"
+  end
+
+  describe "#view_transaction_history" do
+    it "should return the user's transaction history" do
+      subject.create_bank_account
+      expect(subject.view_transaction_history).to eq "history"
+    end
   end
 
   describe "#deposit" do

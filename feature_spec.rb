@@ -12,4 +12,4 @@ p user.withdraw(500)
 p user.get_balance
 p user.withdraw(1000)
 p user.get_balance
-p user.bank_account.transaction_history
+p user.view_transaction_history
