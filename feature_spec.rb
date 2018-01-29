@@ -11,5 +11,5 @@ user.deposit(10000)
 user.withdraw(500)
 user.withdraw(5000)
 user.deposit(10)
-statement = Statement.new(user.view_transaction_history)
-statement.print_full
+
+user.bank_account.get_statement.print_full

@@ -1,9 +1,11 @@
 describe Bank do
 
   let :transaction_class {double(:transaction_class, new: transaction)}
+  let :statement_class {double(:statement_class, new: statement)}
   let :transaction {double(:transaction, date: "1/1/18", amount: 10, balance: 10)}
+  let :statement {double(:statement, print_full: "hello")}
   let :user {double(:user, name: "Geg", address: "123 Street Street")}
-  subject {described_class.new(transaction_class)}
+  subject {described_class.new(transaction_class, statement_class)}
 
   describe "#balance" do
     it "should return a balance" do
@@ -50,6 +52,13 @@ describe Bank do
       subject.deposit(10)
       expect {subject.withdraw(15)}.to change {subject.balance}.by 0
       expect(subject.withdraw(15)).to eq "You don't have that much money"
+    end
+  end
+
+  describe "#print_statement" do
+    it "should call the print_full method on statement class" do
+      expect(statement_class).to receive(:new)
+      subject.print_statement
     end
   end
 

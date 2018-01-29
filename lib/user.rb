@@ -27,8 +27,8 @@ class User
     @bank_account.balance
   end
 
-  def view_transaction_history
-    @bank_account.transaction_history
+  def print_statement
+    @bank_account.print_statement
   end
 
 end

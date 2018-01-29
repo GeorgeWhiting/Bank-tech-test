@@ -1,7 +1,8 @@
 describe User do
 
   let :bank_class {double(:bank_class, new: bank)}
-  let :bank {double(:bank, balance: 10, transaction_history: "history")}
+  let :bank {double(:bank, balance: 10, print_statement: statement)}
+  let :statement {double(:statement, print_full: "hello")}
   subject {described_class.new("Geg", "123 Street Street", bank_class)}
 
 
@@ -20,10 +21,10 @@ describe User do
     expect(subject.create_bank_account).to eq "You already have an account"
   end
 
-  describe "#view_transaction_history" do
-    it "should return the user's transaction history" do
+  describe "#print_statement" do
+    it "should print the user's bank statement" do
       subject.create_bank_account
-      expect(subject.view_transaction_history).to eq "history"
+      expect(subject.print_statement).to eq statement
     end
   end
 
