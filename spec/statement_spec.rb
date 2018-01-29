@@ -12,14 +12,14 @@ describe Statement do
 
   describe "#print_transactions" do
     it "should print the transactions body out" do
-      allow(transaction_history).to receive(:each).and_yield(transaction)
+      allow(transaction_history).to receive_message_chain(:reverse, :each).and_yield(transaction)
       expect {subject.print_transactions}.to output("1/1/18 || 10 || 0 || 10\n").to_stdout
     end
   end
 
   describe "#print_full" do
     it "should print the full transactions list out" do
-      allow(transaction_history).to receive(:each).and_yield(transaction)
+      allow(transaction_history).to receive_message_chain(:reverse, :each).and_yield(transaction)
       expect {subject.print_full}.to output(<<~MESSAGE).to_stdout
       date || credit || debit || balance
       1/1/18 || 10 || 0 || 10
