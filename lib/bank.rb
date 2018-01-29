@@ -12,12 +12,12 @@ class Bank
   end
 
   def deposit(amount)
-    @balance += amount
-    @transaction_history << new_transaction(amount)
+    is_positive?(amount) ? (@balance += amount; @transaction_history << new_transaction(amount)) : "You can't deposit a negative amount"
   end
 
   def withdraw(amount)
-    can_afford?(amount) ? "You don't have that much money" : (@balance -= amount; @transaction_history << @transaction_class.new(Time.new.strftime("%d/%m/%Y"), -amount, @balance))
+    return "You can't withdraw a negative amount" unless is_positive?(amount)
+    can_afford?(amount) ? (@balance -= amount; new_transaction(amount)) : "You don't have that much money"
   end
 
   def print_statement
@@ -27,11 +27,15 @@ class Bank
   private
 
   def can_afford?(amount)
-    @balance - amount < 0
+    @balance - amount > 0
   end
 
   def new_transaction(amount)
     @transaction_class.new(Time.new.strftime("%d/%m/%Y"), amount, @balance)
+  end
+
+  def is_positive?(amount)
+    amount.positive?
   end
 
 end

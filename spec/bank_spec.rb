@@ -24,6 +24,11 @@ describe Bank do
       expect {subject.deposit(10)}.to change {subject.balance}.by 10
     end
 
+    it "should not accept a negative amount" do
+      expect {subject.deposit(-10)}.to change {subject.balance}.by 0
+      expect(subject.deposit(-10)).to eq "You can't deposit a negative amount"
+    end
+
     it "should create a transaction with the correct details" do
       expect(transaction_class).to receive(:new)
       subject.deposit(10)
@@ -39,6 +44,12 @@ describe Bank do
     it "should decrease the balance" do
       subject.deposit(10)
       expect {subject.withdraw(5)}.to change {subject.balance}.by -5
+    end
+
+    it "should not accept a negative amount" do
+      subject.deposit(10)
+      expect {subject.withdraw(-10)}.to change {subject.balance}.by 0
+      expect(subject.withdraw(-10)).to eq "You can't withdraw a negative amount"
     end
 
     it "should create a transaction with the correct details" do
