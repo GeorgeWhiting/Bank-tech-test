@@ -13,15 +13,25 @@ class Bank
 
   def deposit(amount)
     @balance += amount
-    @transaction_history << @transaction_class.new(Time.new.strftime("%d/%m/%Y"), amount, @balance)
+    @transaction_history << new_transaction(amount)
   end
 
   def withdraw(amount)
-    (@balance - amount < 0) ? "You don't have that much money" : (@balance -= amount; @transaction_history << @transaction_class.new(Time.new.strftime("%d/%m/%Y"), -amount, @balance))
+    can_afford?(amount) ? "You don't have that much money" : (@balance -= amount; @transaction_history << @transaction_class.new(Time.new.strftime("%d/%m/%Y"), -amount, @balance))
   end
 
   def print_statement
     @statement_class.new(@transaction_history).print_full
+  end
+
+  private
+
+  def can_afford?(amount)
+    @balance - amount < 0
+  end
+
+  def new_transaction(amount)
+    @transaction_class.new(Time.new.strftime("%d/%m/%Y"), amount, @balance)
   end
 
 end
