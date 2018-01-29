@@ -1,21 +1,23 @@
 describe User do
 
-  subject {described_class.new("Geg", "123 Street Street")}
+  let :bank_class {double(:bank_class, new: bank)}
   let :bank {double(:bank, balance: 10)}
+  subject {described_class.new("Geg", "123 Street Street", bank_class)}
+
 
   it "can be initialised with name, address" do
     expect(subject.name).to eq "Geg"
     expect(subject.address).to eq "123 Street Street"
   end
 
-  it "should have an associated bank account" do
-    subject.assign_bank_account(bank)
-    expect(subject.bank_account).to eq bank
+  it "should be able to open a bank account" do
+    expect(bank_class).to receive(:new)
+    subject.create_bank_account
   end
 
   describe "#deposit" do
     it "should call the bank's deposit method" do
-      subject.assign_bank_account(bank)
+      subject.create_bank_account
       expect(bank).to receive(:deposit).with(10)
       subject.deposit(10)
     end
@@ -23,7 +25,7 @@ describe User do
 
   describe "#withdraw" do
     it "should call the bank's withdraw method" do
-      subject.assign_bank_account(bank)
+      subject.create_bank_account
       expect(bank).to receive(:withdraw).with(10)
       subject.withdraw(10)
     end
@@ -31,7 +33,7 @@ describe User do
 
   describe "#get_balance" do
     it "should return the user's bank balance" do
-      subject.assign_bank_account(bank)
+      subject.create_bank_account
       expect(subject.get_balance).to eq 10
     end
   end
