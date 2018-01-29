@@ -5,19 +5,16 @@ describe User do
   let :statement {double(:statement, print_full: "hello")}
   subject {described_class.new("Geg", bank_class)}
 
+  describe "#create_bank_account" do
+    it "should be able to open a bank account" do
+      expect(bank_class).to receive(:new)
+      subject.create_bank_account
+    end
 
-  it "can be initialised with name, address" do
-    expect(subject.name).to eq "Geg"
-  end
-
-  it "should be able to open a bank account" do
-    expect(bank_class).to receive(:new)
-    subject.create_bank_account
-  end
-
-  it "shouldn't be able to have multiple accounts" do
-    subject.create_bank_account
-    expect(subject.create_bank_account).to eq "You already have an account"
+    it "shouldn't be able to have multiple accounts" do
+      subject.create_bank_account
+      expect(subject.create_bank_account).to eq "You already have an account"
+    end
   end
 
   describe "#print_statement" do
