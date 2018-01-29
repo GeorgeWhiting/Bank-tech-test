@@ -2,7 +2,6 @@ require_relative 'bank'
 class User
 
   attr_reader :name
-  attr_accessor :bank_account
 
   def initialize(name, bank_class = Bank)
     @name = name
