@@ -1,7 +1,7 @@
 describe Bank do
 
   let :transaction_class {double(:transaction_class, new: transaction)}
-  let :transaction {double(:transaction, date: "1/1/18", amount: 10)}
+  let :transaction {double(:transaction, date: "1/1/18", amount: 10, balance: 10)}
   let :user {double(:user, name: "Geg", address: "123 Street Street")}
   subject {described_class.new(transaction_class)}
 
@@ -32,7 +32,7 @@ describe Bank do
   describe "#withdraw" do
 
     let :transaction_class {double(:transaction_class, new: withdrawal)}
-    let :withdrawal {double(:withdrawal, date: "1/1/18", amount: 5)}
+    let :withdrawal {double(:withdrawal, date: "1/1/18", amount: 5, balance: 5)}
 
     it "should decrease the balance" do
       subject.deposit(10)

@@ -1,7 +1,6 @@
 class Statement
   def initialize(transaction_history)
     @transaction_history = transaction_history
-    @balance = 0
   end
 
   def print_full
@@ -10,14 +9,17 @@ class Statement
   end
 
   def print_header
-    puts "date || amount || balance"
+    puts "date || credit || debit || balance"
   end
 
   def print_transactions
-    @transaction_history.each do |transaction|
-      @balance += transaction.amount
-      puts "#{transaction.date} || #{transaction.amount} || #{@balance}"
+    @transaction_history.reverse.each do |transaction|
+      puts "#{transaction.date} || #{credit_or_debit(transaction.amount)[0]} || #{credit_or_debit(transaction.amount)[1]} || #{transaction.balance}"
     end
+  end
+
+  def credit_or_debit(amount)
+    amount.positive? ? [amount, 0] : [0, -amount]
   end
 
 end
