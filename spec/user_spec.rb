@@ -1,7 +1,7 @@
 describe User do
 
   subject {described_class.new("Geg", "123 Street Street")}
-  let :bank {double(:bank)}
+  let :bank {double(:bank, balance: 10)}
 
   it "can be initialised with name, address" do
     expect(subject.name).to eq "Geg"
@@ -26,6 +26,13 @@ describe User do
       subject.assign_bank_account(bank)
       expect(bank).to receive(:withdraw).with(10)
       subject.withdraw(10)
+    end
+  end
+
+  describe "#get_balance" do
+    it "should return the user's bank balance" do
+      subject.assign_bank_account(bank)
+      expect(subject.get_balance).to eq 10
     end
   end
 end

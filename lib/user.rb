@@ -21,5 +21,9 @@ class User
     @bank_account.withdraw(amount)
   end
 
+  def get_balance
+    @bank_account.balance
+  end
+
 
 end
